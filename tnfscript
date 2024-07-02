@@ -15,11 +15,6 @@ end
 
 game:GetService("RunService").Heartbeat:Connect(UpdateValues)
 
-local InfiniteCoinsToggle = Tabs.Main:AddToggle("Infinite Coins", {
-    Title = "Infinite Coins",
-    Default = false
-})
-
 local function CoinLoop()
     while InfiniteCoinsToggle.Value do
         game:GetService("MarketplaceService"):SignalPromptProductPurchaseFinished(game.Players.LocalPlayer.UserId,
@@ -33,21 +28,6 @@ InfiniteCoinsToggle:OnChanged(function()
         CoinLoop()
     end
 end)
-
-Tabs.Main:AddParagraph({
-    Title = "Made by Atom.mp4 ",
-    Content = "Contact me on discord for suggestions"
-})
-
-Tabs.Main:AddParagraph({
-    Title = "UI by DawidScripts - Fluent",
-    Content = ""
-})
-
-Tabs.Gamepasses:AddParagraph({
-    Title = "VIP AND CELEBRATIONS ARE CLIENTSIDED",
-    Content = ""
-})
 
 local VIPToggle = Tabs.Gamepasses:AddToggle("VIP", {
     Title = "VIP",
