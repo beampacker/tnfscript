@@ -1,0 +1,83 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local character = LocalPlayer.Character
+local humanoid = character and character:FindFirstChild("Humanoid")
+
+-- ANTICHEAT BYPASS FOR TELEPORTATION AND WALKSPEED
+local anticheat = game.ReplicatedStorage.RemoteEvents:FindFirstChild("Sanity")
+
+if anticheat then
+    anticheat:Destroy()
+    print("Anticheat bypassed")
+else
+    print("Anticheat already bypassed")
+end
+
+game:GetService("RunService").Heartbeat:Connect(UpdateValues)
+
+local InfiniteCoinsToggle = Tabs.Main:AddToggle("Infinite Coins", {
+    Title = "Infinite Coins",
+    Default = false
+})
+
+local function CoinLoop()
+    while InfiniteCoinsToggle.Value do
+        game:GetService("MarketplaceService"):SignalPromptProductPurchaseFinished(game.Players.LocalPlayer.UserId,
+            1836846947, true)
+        task.wait(0.2)
+    end
+end
+
+InfiniteCoinsToggle:OnChanged(function()
+    if InfiniteCoinsToggle.Value then
+        CoinLoop()
+    end
+end)
+
+Tabs.Main:AddParagraph({
+    Title = "Made by Atom.mp4 ",
+    Content = "Contact me on discord for suggestions"
+})
+
+Tabs.Main:AddParagraph({
+    Title = "UI by DawidScripts - Fluent",
+    Content = ""
+})
+
+Tabs.Gamepasses:AddParagraph({
+    Title = "VIP AND CELEBRATIONS ARE CLIENTSIDED",
+    Content = ""
+})
+
+local VIPToggle = Tabs.Gamepasses:AddToggle("VIP", {
+    Title = "VIP",
+    Default = true
+})
+
+VIPToggle:OnChanged(function(value)
+    LocalPlayer.playerstats.Gamepasses.VIP.Value = value
+end)
+
+VIPToggle:SetValue(false)
+
+local CelebrationsToggle = Tabs.Gamepasses:AddToggle("Celebrations", {
+    Title = "Celebrations",
+    Default = true
+})
+
+CelebrationsToggle:OnChanged(function(value)
+    LocalPlayer.playerstats.Gamepasses["Finish Celebrations"].Value = value
+end)
+
+CelebrationsToggle:SetValue(false)
+
+local RelaySettingsToggle = Tabs.Gamepasses:AddToggle("More Relay Settings", {
+    Title = "More Relay Settings",
+    Default = true
+})
+
+RelaySettingsToggle:OnChanged(function(value)
+    LocalPlayer.playerstats.Gamepasses["More Relay Settings"].Value = value
+end)
+
+RelaySettingsToggle:SetValue(false)
